@@ -1,0 +1,13 @@
+﻿.sunny-effect {
+    background-color: yellow;
+    background-image: url('/images/sunny.png');
+    background-size: cover;
+    color: black;
+}
+
+.rainy-effect {
+    background-color: lightblue;
+    background-image: url('/images/rainy.png');
+    background-size: cover;
+    color: white;
+}

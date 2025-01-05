@@ -1,64 +1,54 @@
 ﻿@page "/weather"
-@attribute [StreamRendering]
+@using Radzen.Blazor;
+@using Radzen;
+@using Models;
+@rendermode InteractiveServer
+@inject IJSRuntime JSRuntime
 
+<link rel="stylesheet" href="css/weather.css">
 <PageTitle>Weather</PageTitle>
 
-<h1>Weather</h1>
+<div id="weather-container">
 
-<p>This component demonstrates showing data.</p>
+    <h1>Weather</h1>
 
-@if (forecasts == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+    <p>This component demonstrates showing data and triggering effects based on weather conditions.</p>
+
+    <RadzenDataGrid AllowColumnResize="true" AllowRowSelectOnRowClick="true" SelectionMode="DataGridSelectionMode.Single"
+                    Data="@weatherItems" TItem="WeatherData"
+                    Style="--rz-grid-header-text-transform: none; --rz-grid-header-font-size: 20px; width:100%;"
+                    RowSelect="OnRowClick">
+        <Columns>
+            <RadzenDataGridColumn TItem="WeatherData" Property="Temperature" Title="Temperature (°C)" />
+            <RadzenDataGridColumn TItem="WeatherData" Property="WindSpeed" Title="Wind Speed (km/h)" />
+            <RadzenDataGridColumn TItem="WeatherData" Property="Humidity" Title="Humidity (%)" />
+        </Columns>
+    </RadzenDataGrid>
+
+</div>
 
 @code {
-    private WeatherForecast[]? forecasts;
+
+    private List<WeatherData> weatherItems = new List<WeatherData>();
 
     protected override async Task OnInitializedAsync()
     {
-        // Simulate asynchronous loading to demonstrate streaming rendering
-        await Task.Delay(500);
-
-        var startDate = DateOnly.FromDateTime(DateTime.Now);
-        var summaries = new[] { "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" };
-        forecasts = Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        weatherItems = new List<WeatherData>
         {
-            Date = startDate.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = summaries[Random.Shared.Next(summaries.Length)]
-        }).ToArray();
+            new WeatherData { Temperature = 23.4, WindSpeed = 12.5, Humidity = 58 },
+            new WeatherData { Temperature = 21.2, WindSpeed = 15.0, Humidity = 60 },
+            new WeatherData { Temperature = 21.2, WindSpeed = 15.0, Humidity = 60 },
+            new WeatherData { Temperature = 21.2, WindSpeed = 15.0, Humidity = 60 },
+            new WeatherData { Temperature = 25.7, WindSpeed = 8.3, Humidity = 55 }
+        };
     }
 
-    private class WeatherForecast
+    private async Task OnRowClick(WeatherData args)
     {
-        public DateOnly Date { get; set; }
-        public int TemperatureC { get; set; }
-        public string? Summary { get; set; }
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        var weatherData = args;
+        string effect = weatherData.Temperature > 25 ? "sunny" : "rainy";
+        await JSRuntime.InvokeVoidAsync("applyWeatherEffect", effect);
     }
+
+
 }
