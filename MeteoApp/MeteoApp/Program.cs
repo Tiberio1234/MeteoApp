@@ -9,8 +9,9 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents(); // Add server-side interactive component support
 
 builder.Services.AddRadzenComponents();
-builder.Services.AddSingleton<ThemeService>();
 builder.Services.AddSingleton<AnalyticsViewModel>();
+builder.Services.AddSingleton<ThemeService>();
+
 var app = builder.Build();
 
 

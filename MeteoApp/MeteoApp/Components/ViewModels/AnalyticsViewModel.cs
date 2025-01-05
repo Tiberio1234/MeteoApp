@@ -9,6 +9,7 @@ namespace MeteoApp.Components.ViewModels
         public AnalyticsViewModel()
         {
             CityPopulationDataItem = new List<CityPopulation>();
+            LoadData();
         }
 
         public void LoadData()

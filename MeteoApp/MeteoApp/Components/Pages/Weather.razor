@@ -9,27 +9,32 @@
 <PageTitle>Weather</PageTitle>
 
 <div id="weather-container" class="weather-container">
+    <RadzenStack Orientation="Orientation.Vertical" JustifyContent="JustifyContent.SpaceBetween" Style="height:65%">
 
-    <h1>Weather</h1>
+            <h1>Weather</h1>
 
-    <p>This component demonstrates showing data and triggering effects based on weather conditions.</p>
+        
 
-    <RadzenDataGrid AllowColumnResize="true" AllowRowSelectOnRowClick="true" SelectionMode="DataGridSelectionMode.Single"
-                    Data="@weatherItems" TItem="WeatherData"
-                    Style="--rz-grid-header-text-transform: none; --rz-grid-header-font-size: 20px; width:100%;"
-                    RowSelect="OnRowClick">
-        <Columns>
-            <RadzenDataGridColumn TItem="WeatherData" Property="Temperature" Title="Temperature (°C)" />
-            <RadzenDataGridColumn TItem="WeatherData" Property="WindSpeed" Title="Wind Speed (km/h)" />
-            <RadzenDataGridColumn TItem="WeatherData" Property="Humidity" Title="Humidity (%)" />
-        </Columns>
-    </RadzenDataGrid>
+        <RadzenDataGrid AllowColumnResize="true" AllowRowSelectOnRowClick="true" SelectionMode="DataGridSelectionMode.Single"
+                        Data="@weatherItems" TItem="WeatherData"
+                        Style="--rz-grid-header-text-transform: none; --rz-grid-header-font-size: 20px; width:100%; opacity:0.85;"
+                        RowSelect="OnRowClick"
+                        @bind-Value="selectedWeatherItem">
+            <Columns>
+                <RadzenDataGridColumn TItem="WeatherData" Property="Temperature" Title="Temperature (°C)" />
+                <RadzenDataGridColumn TItem="WeatherData" Property="WindSpeed" Title="Wind Speed (km/h)" />
+                <RadzenDataGridColumn TItem="WeatherData" Property="Humidity" Title="Humidity (%)" />
+            </Columns>
+        </RadzenDataGrid>
+    </RadzenStack>
+   
 
 </div>
 
 @code {
 
     private List<WeatherData> weatherItems = new List<WeatherData>();
+    private IList<WeatherData> selectedWeatherItem;
 
     protected override async Task OnInitializedAsync()
     {
@@ -41,6 +46,15 @@
             new WeatherData { Temperature = 21.2, WindSpeed = 15.0, Humidity = 60 },
             new WeatherData { Temperature = 25.7, WindSpeed = 8.3, Humidity = 55 }
         };
+        selectedWeatherItem = new List<WeatherData>() { weatherItems.FirstOrDefault() };
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+		{
+            await OnRowClick(weatherItems[0]);
+		}
     }
 
     private async Task OnRowClick(WeatherData args)
