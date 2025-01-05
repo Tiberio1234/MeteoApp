@@ -9,28 +9,27 @@
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="flex-column">
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
+            <a class="nav-link" href="/" Match="NavLinkMatch.All">
+                <RadzenIcon Icon="home" Size="24px" Class="nav-icon" /> Home
+            </a>
         </div>
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
+            <a class="nav-link" href="/weather">
+                <RadzenIcon Icon="cloud" Size="24px" Class="nav-icon" /> Weather
+            </a>
         </div>
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
+            <a class="nav-link" href="/analytics">
+                <RadzenIcon Icon="analytics" Size="24px" Class="nav-icon" /> City Analysis
+            </a>
         </div>
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="analytics">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Analytics
-            </NavLink>
+            <a class="nav-link" href="/counter">
+                <RadzenIcon Icon="circle" Size="24px" Class="nav-icon" /> Counter
+            </a>
         </div>
     </nav>
 </div>
-

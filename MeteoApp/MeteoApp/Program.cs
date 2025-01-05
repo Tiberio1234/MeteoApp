@@ -1,4 +1,5 @@
 using MeteoApp.Components;
+using MeteoApp.Components.ViewModels;
 using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,8 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents(); // Add server-side interactive component support
-builder.Services.AddSingleton<ThemeService>();
+
 builder.Services.AddRadzenComponents();
+builder.Services.AddSingleton<ThemeService>();
+builder.Services.AddSingleton<AnalyticsViewModel>();
 var app = builder.Build();
 
 
