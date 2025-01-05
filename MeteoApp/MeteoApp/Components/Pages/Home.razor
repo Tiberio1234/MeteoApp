@@ -1,0 +1,50 @@
+﻿@page "/"
+
+<PageTitle>Weather & City Analysis</PageTitle>
+
+<link rel="stylesheet" href="css/home.css">
+<script src="js/Slider.js"></script>
+
+<div class="main-container">
+		<h1>Welcome to Weather & City Analysis!</h1>
+
+		<p>Stay informed with real-time weather updates and explore insightful city analysis through interactive graphs.</p>
+
+		<section class="features">
+			<div class="feature-item">
+				<h2>Weather Updates</h2>
+				<p>Access current weather conditions and forecasts for any city. Stay prepared with accurate, up-to-date weather information.</p>
+			</div>
+			<div class="feature-item">
+				<h2>City Analysis</h2>
+				<p>Dive into detailed analyses of city demographics and tourism trends. Visualize data through interactive graphs and charts to understand population dynamics and tourist influx.</p>
+			</div>
+		</section>
+
+		<section class="call-to-action">
+			<p>Start your journey now! Explore the Weather or City Analysis sections to gain valuable insights.</p>
+		</section>
+
+    <div class="image-slider">
+        <div class="slider">
+            <div class="slide">
+                <img src="images/Rome.jpg" alt="Rome">
+                <p>Rome</p>
+            </div>
+            <div class="slide">
+                <img src="images/Paris.jpeg" alt="Paris">
+                <p>Paris</p>
+            </div>
+            <div class="slide">
+                <img src="images/Bucharest.jpg" alt="Bucharest">
+                <p>Bucharest</p>
+            </div>
+            <div class="slide">
+                <img src="images/London.jpg" alt="London">
+                <p>London</p>
+            </div>
+        </div>
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+</div>
