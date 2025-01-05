@@ -4,7 +4,7 @@
     {
         public string CityName { get; set; } = string.Empty;
         public double PupulationInMillions { get; set; }
-        public double ForeignVisitorsInMillions { get; set; }
+        public List<VisitorsByYear> ForeignVisitorsInMillions { get; set; } = [];
         public double CityBeautyPercentage { get; set; }
     }
 }

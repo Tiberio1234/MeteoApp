@@ -27,16 +27,31 @@
             
     </RadzenCard>
     </RadzenStack>
-    <RadzenCard>
+    <RadzenCard Style="width:100%">
         <h4>Foreign Visitors of cities in (M)</h4>
         <RadzenChart Style="width:100%">
-            <RadzenColumnSeries Data="@AnalitycsViewModel.CityPopulationDataItem" CategoryProperty="CityName" Title="Cities" ValueProperty="CityBeautyPercentage">
-            </RadzenColumnSeries>
-            <RadzenColumnOptions Radius="5" />
-            <RadzenValueAxis Step="20" Min="0" Max="100">
-                <RadzenGridLines Visible="true" />
-                <RadzenAxisTitle Text="Percentage of beauty" />
-            </RadzenValueAxis>
+            <RadzenLineSeries Smooth="true" Data="@AnalitycsViewModel.CityPopulationDataItem[0].ForeignVisitorsInMillions" CategoryProperty="Year" Title="Rome" LineType="LineType.Dashed" ValueProperty="VisitorsInMillions">
+                <RadzenMarkers Visible="true" MarkerType="MarkerType.Circle" />
+            <RadzenSeriesDataLabels Visible="true" />
+            </RadzenLineSeries>
+            <RadzenLineSeries Smooth="true" Data="@AnalitycsViewModel.CityPopulationDataItem[1].ForeignVisitorsInMillions" CategoryProperty="Year" Title="Bucharest" LineType="LineType.Dashed" ValueProperty="VisitorsInMillions">
+                <RadzenMarkers Visible="true" MarkerType="MarkerType.Circle" />
+                <RadzenSeriesDataLabels Visible="true" />
+            </RadzenLineSeries>
+            <RadzenLineSeries Smooth="true" Data="@AnalitycsViewModel.CityPopulationDataItem[2].ForeignVisitorsInMillions" CategoryProperty="Year" Title="Paris" LineType="LineType.Dashed" ValueProperty="VisitorsInMillions">
+                <RadzenMarkers Visible="true" MarkerType="MarkerType.Circle" />
+                <RadzenSeriesDataLabels Visible="true" />
+            </RadzenLineSeries>
+            <RadzenLineSeries Smooth="true" Data="@AnalitycsViewModel.CityPopulationDataItem[3].ForeignVisitorsInMillions" CategoryProperty="Year" Title="London" LineType="LineType.Dashed" ValueProperty="VisitorsInMillions">
+                <RadzenMarkers Visible="true" MarkerType="MarkerType.Circle" />
+                <RadzenSeriesDataLabels Visible="true" />
+            </RadzenLineSeries>
+            
+        <RadzenCategoryAxis Padding="20" />
+        <RadzenValueAxis>
+            <RadzenGridLines Visible="true" />
+            <RadzenAxisTitle Text="Foreign visitors (M)" />
+        </RadzenValueAxis>
         </RadzenChart>
 
     </RadzenCard>
