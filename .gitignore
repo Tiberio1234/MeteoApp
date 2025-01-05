@@ -1,4 +1,7 @@
 .vs/
 bin/
 obj/
-MeteoApp.csproj
+
+MeteoApp/MeteoApp/obj
+MeteoApp/.vs/MeteoApp
+MeteoApp/MeteoApp/bin/Debug
