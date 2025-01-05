@@ -1,13 +1,25 @@
-﻿.sunny-effect {
+﻿
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.sunny-effect {
     background-color: yellow;
-    background-image: url('/images/sunny.png');
+    background-image: url(/images/sunny.jpg);
     background-size: cover;
-    color: black;
+    color: white;
 }
 
 .rainy-effect {
     background-color: lightblue;
-    background-image: url('/images/rainy.png');
+    background-image: url(/images/rainy.jpg);
     background-size: cover;
     color: white;
+}
+
+
+.weather-container {
+    height: 100%;
 }
