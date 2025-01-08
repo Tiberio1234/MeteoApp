@@ -28,17 +28,16 @@
 
        
 
-        <div style="height: 600px; overflow-y: auto">
             <RadzenDataGrid AllowColumnResize="true"
                             AllowRowSelectOnRowClick="true"
                             SelectionMode="DataGridSelectionMode.Single"
                             Data="@WeatherVM.WeatherDataList"
                             TItem="WeatherData"
-                            Style="--rz-grid-header-text-transform: none; --rz-grid-header-font-size: 20px; width:100%; opacity:0.85;"
+                            Style="height: 600px;--rz-grid-header-text-transform: none; --rz-grid-header-font-size: 20px; width:100%; opacity:0.85;"
                             RowSelect="OnRowClick"
                             PageSize="24"
                             AllowPaging="true"
-                            AllowAlternatingRows="false"
+                            AllowAlternatingRows="true"
                             @bind-Value="WeatherVM.SelectedWeatherItem">
                 <Columns>
                     <RadzenDataGridColumn TItem="WeatherData" Property="Time" Title="Hour" />
@@ -49,8 +48,7 @@
                     <RadzenDataGridColumn TItem="WeatherData" Property="CloudCover" Title="Cloud Cover (%)" />
                 </Columns>
             </RadzenDataGrid>
-        </div>
-   </RadzenStack>
+    </RadzenStack>
 
 </div>
 
@@ -69,7 +67,7 @@
     private async Task OnRowClick(WeatherData args)
     {
         var weatherData = args;
-        string effect = weatherData.Temperature > 25 ? "sunny" : "rainy";
+        string effect = weatherData.CloudCover <= 50 ? "sunny" : "rainy";
         await JSRuntime.InvokeVoidAsync("applyWeatherEffect", effect);
     }
 
