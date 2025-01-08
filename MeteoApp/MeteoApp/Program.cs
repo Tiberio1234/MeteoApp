@@ -1,4 +1,5 @@
 using MeteoApp.Components;
+using MeteoApp.Components.OpenMeteo;
 using MeteoApp.Components.ViewModels;
 using Radzen;
 
@@ -11,6 +12,11 @@ builder.Services.AddRazorComponents()
 builder.Services.AddRadzenComponents();
 builder.Services.AddSingleton<AnalyticsViewModel>();
 builder.Services.AddSingleton<ThemeService>();
+
+builder.Services.AddHttpClient();
+builder.Services.AddScoped<OpenMeteoRequestHandler>();
+builder.Services.AddScoped<WeatherViewModel>();
+
 
 var app = builder.Build();
 

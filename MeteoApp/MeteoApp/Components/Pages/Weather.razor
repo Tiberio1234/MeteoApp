@@ -2,58 +2,67 @@
 @using Radzen.Blazor;
 @using Radzen;
 @using Models;
+@using ViewModels;
+
 @rendermode InteractiveServer
 @inject IJSRuntime JSRuntime
+@inject WeatherViewModel WeatherVM
 
 <link rel="stylesheet" href="css/weather.css">
 <PageTitle>Weather</PageTitle>
 
 <div id="weather-container" class="weather-container">
-    <RadzenStack Orientation="Orientation.Vertical" JustifyContent="JustifyContent.SpaceBetween" Style="height:65%">
+    <RadzenStack Orientation="Orientation.Vertical" JustifyContent="JustifyContent.Normal" Style="height:100%">
 
-            <h1>Weather</h1>
-
+        <div>
+            <RadzenStack Orientation="Orientation.Vertical" JustifyContent="JustifyContent.SpaceBetween">
+                <h1>Weather</h1>
+                <RadzenDropDown Data="@WeatherVM.CityLocations"
+                                TextProperty="CityName"
+                                Style="width:25%"
+                                @bind-Value="@WeatherVM.SelectedCity"
+                                Change="@(async () => await WeatherVM.GetWeatherForCity())" />
+            </RadzenStack>
+        </div>
         
 
-        <RadzenDataGrid AllowColumnResize="true" AllowRowSelectOnRowClick="true" SelectionMode="DataGridSelectionMode.Single"
-                        Data="@weatherItems" TItem="WeatherData"
-                        Style="--rz-grid-header-text-transform: none; --rz-grid-header-font-size: 20px; width:100%; opacity:0.85;"
-                        RowSelect="OnRowClick"
-                        @bind-Value="selectedWeatherItem">
-            <Columns>
-                <RadzenDataGridColumn TItem="WeatherData" Property="Temperature" Title="Temperature (°C)" />
-                <RadzenDataGridColumn TItem="WeatherData" Property="WindSpeed" Title="Wind Speed (km/h)" />
-                <RadzenDataGridColumn TItem="WeatherData" Property="Humidity" Title="Humidity (%)" />
-            </Columns>
-        </RadzenDataGrid>
-    </RadzenStack>
-   
+       
+
+        <div style="height: 600px; overflow-y: auto">
+            <RadzenDataGrid AllowColumnResize="true"
+                            AllowRowSelectOnRowClick="true"
+                            SelectionMode="DataGridSelectionMode.Single"
+                            Data="@WeatherVM.WeatherDataList"
+                            TItem="WeatherData"
+                            Style="--rz-grid-header-text-transform: none; --rz-grid-header-font-size: 20px; width:100%; opacity:0.85;"
+                            RowSelect="OnRowClick"
+                            PageSize="24"
+                            AllowPaging="true"
+                            AllowAlternatingRows="false"
+                            @bind-Value="WeatherVM.SelectedWeatherItem">
+                <Columns>
+                    <RadzenDataGridColumn TItem="WeatherData" Property="Time" Title="Hour" />
+                    <RadzenDataGridColumn TItem="WeatherData" Property="Temperature" Title="Temperature (°C)" />
+                    <RadzenDataGridColumn TItem="WeatherData" Property="WindSpeed" Title="Wind Speed (km/h)" />
+                    <RadzenDataGridColumn TItem="WeatherData" Property="Humidity" Title="Humidity (%)" />
+                    <RadzenDataGridColumn TItem="WeatherData" Property="PrecipitationProbability" Title="Precipitation Probability (%)" />
+                    <RadzenDataGridColumn TItem="WeatherData" Property="CloudCover" Title="Cloud Cover (%)" />
+                </Columns>
+            </RadzenDataGrid>
+        </div>
+   </RadzenStack>
 
 </div>
 
 @code {
 
-    private List<WeatherData> weatherItems = new List<WeatherData>();
-    private IList<WeatherData> selectedWeatherItem;
-
-    protected override async Task OnInitializedAsync()
-    {
-        weatherItems = new List<WeatherData>
-        {
-            new WeatherData { Temperature = 23.4, WindSpeed = 12.5, Humidity = 58 },
-            new WeatherData { Temperature = 21.2, WindSpeed = 15.0, Humidity = 60 },
-            new WeatherData { Temperature = 21.2, WindSpeed = 15.0, Humidity = 60 },
-            new WeatherData { Temperature = 21.2, WindSpeed = 15.0, Humidity = 60 },
-            new WeatherData { Temperature = 25.7, WindSpeed = 8.3, Humidity = 55 }
-        };
-        selectedWeatherItem = new List<WeatherData>() { weatherItems.FirstOrDefault() };
-    }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
 		{
-            await OnRowClick(weatherItems[0]);
+            await WeatherVM.Initialize();
+            await OnRowClick(WeatherVM.WeatherDataList[0]);
+            StateHasChanged();
 		}
     }
 
