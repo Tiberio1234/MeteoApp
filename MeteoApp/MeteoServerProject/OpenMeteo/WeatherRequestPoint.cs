@@ -1,4 +1,4 @@
-﻿namespace MeteoApp.Components.Models
+﻿namespace MeteoServerProject.OpenMeteo
 {
     public class WeatherRequestPoint
     {

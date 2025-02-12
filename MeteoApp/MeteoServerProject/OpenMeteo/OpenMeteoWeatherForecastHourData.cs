@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
 using System.Text.Json.Serialization;
 
-namespace MeteoApp.Components.OpenMeteo
+namespace MeteoServerProject.OpenMeteo
 {
-    public class OpenMeteoWeatherForecastHourData  //temperature is air temperature and not water temperature
+    public class OpenMeteoWeatherForecastHourData 
 	{
 		[JsonPropertyName("time")]
 		public List<string> Time { get; set; }

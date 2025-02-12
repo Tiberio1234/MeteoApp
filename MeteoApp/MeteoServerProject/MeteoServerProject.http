@@ -1,0 +1,6 @@
+@MeteoServerProject_HostAddress = http://localhost:5285
+
+GET {{MeteoServerProject_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,10 +1,8 @@
-﻿using MeteoApp.Components.Models;
-using Microsoft.Extensions.Options;
-using System.Text.Json;
+﻿using System.Text.Json;
 
-namespace MeteoApp.Components.OpenMeteo
+namespace MeteoServerProject.OpenMeteo
 {
-    public class OpenMeteoRequestHandler
+	public class OpenMeteoRequestHandler
 	{
 		private HttpClient HttpClient { get; }
 

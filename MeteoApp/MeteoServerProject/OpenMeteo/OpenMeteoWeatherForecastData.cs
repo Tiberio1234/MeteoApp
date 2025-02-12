@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace MeteoApp.Components.OpenMeteo
+namespace MeteoServerProject.OpenMeteo
 {
 	public class OpenMeteoWeatherForecastData
 	{

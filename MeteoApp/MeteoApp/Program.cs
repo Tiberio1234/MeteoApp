@@ -1,5 +1,5 @@
 using MeteoApp.Components;
-using MeteoApp.Components.OpenMeteo;
+using MeteoApp.Components.Services;
 using MeteoApp.Components.ViewModels;
 using Radzen;
 
@@ -7,18 +7,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents(); // Add server-side interactive component support
+	.AddInteractiveServerComponents();
 
+// Register HttpClient and WeatherService
+builder.Services.AddHttpClient<WeatherDataService>();
+builder.Services.AddScoped<WeatherDataService>();
+
+// Register other services
 builder.Services.AddRadzenComponents();
 builder.Services.AddSingleton<AnalyticsViewModel>();
 builder.Services.AddSingleton<ThemeService>();
-
-builder.Services.AddHttpClient();
-builder.Services.AddScoped<OpenMeteoRequestHandler>();
 builder.Services.AddScoped<WeatherViewModel>();
 
 
 var app = builder.Build();
+
 
 
 // Configure the HTTP request pipeline.

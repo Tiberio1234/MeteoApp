@@ -1,4 +1,6 @@
-﻿namespace MeteoApp.Components.Models
+﻿using MeteoServerProject.OpenMeteo;
+
+namespace MeteoApp.Components.Models
 {
     public class CityLocation
     {
