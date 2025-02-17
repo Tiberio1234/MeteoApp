@@ -5,7 +5,9 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeteoApp", "MeteoApp\MeteoApp.csproj", "{3C75703C-368E-40D3-B761-52553A1624C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteoServerProject", "MeteoServerProject\MeteoServerProject.csproj", "{8F9A623C-61C5-448D-AF61-C753F9FB1FBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeteoServerProject", "MeteoServerProject\MeteoServerProject.csproj", "{8F9A623C-61C5-448D-AF61-C753F9FB1FBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject.csproj", "{10FAB25B-ED32-4624-A4B8-8C244F89A2FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{8F9A623C-61C5-448D-AF61-C753F9FB1FBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F9A623C-61C5-448D-AF61-C753F9FB1FBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F9A623C-61C5-448D-AF61-C753F9FB1FBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10FAB25B-ED32-4624-A4B8-8C244F89A2FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10FAB25B-ED32-4624-A4B8-8C244F89A2FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10FAB25B-ED32-4624-A4B8-8C244F89A2FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10FAB25B-ED32-4624-A4B8-8C244F89A2FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
