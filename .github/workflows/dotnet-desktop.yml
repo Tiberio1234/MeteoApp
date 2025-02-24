@@ -1,0 +1,45 @@
+name: .NET Core Desktop
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+    runs-on: windows-latest
+    env:
+      Solution_Name: MeteoApp/MeteoApp.sln
+      Test_Project_Path: MeteoApp/TestProject/TestProject.csproj
+      Wap_Project_Directory: MeteoApp/MeteoApp
+      Wap_Project_Path: MeteoApp/MeteoApp/MeteoApp.csproj
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Install the .NET Core workload
+      - name: Install .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      # Add MSBuild to the PATH
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v2
+
+      # Execute all unit tests in the solution
+      - name: Execute unit tests
+        run: dotnet test ${{ env.Test_Project_Path }}
+
+      # Restore the application to populate the obj folder with RuntimeIdentifiers
+      - name: Restore the application
+        run: msbuild ${{ env.Solution_Name }} /t:Restore /p:Configuration=${{ matrix.configuration }}
+        env:
+          Configuration: ${{ matrix.configuration }}
